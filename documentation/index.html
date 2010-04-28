@@ -1,0 +1,225 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+	"http://www.w3.org/TR/html4/loose.dtd">
+<html>
+	<head>
+		<title>seedJS.org</title>
+		<meta name="description" content="CommonJS package manager and more.">
+		<meta name="keywords" content="seedjs, CommonJS, nodeJS, javascript">
+		<link rel="stylesheet" href="/css/screen.css" type="text/css" media="screen" charset="utf-8">
+	</head>
+	<body>
+		<div id="main-body">
+			<h1 id="installing_packages">Installing Packages</h1>
+
+			<p>To install a seed package, just use the <code>install</code> command:</p>
+
+			<pre><code>seed install markdown</code></pre>
+
+			<p>This will install both the package itself as well as any dependencies in a shared location on your computer (usually ~/.seeds/packages).  </p>
+
+			<h1 id="requiring_packages">Requiring Packages</h1>
+
+			<p>Seed extends the require() function defined for your module so that it can 
+			find seed packages as well as regular node modules.  This means to use seed
+			you need to make sure it is loaded before you use require.  Normally the
+			best way to do this is to run your JavaScript using seed.  For example,
+			to run some JavaScript you could use seed like so:</p>
+
+			<pre><code>seed ./path/to/my/javascript.js
+			</code></pre>
+
+			<p>This will preload seed then run your JavaScript with node.js as normal.  You 
+			can also invoke your code using seed as a pound-bash:</p>
+
+			<pre><code>#!/usr/bin/env seed
+var markdown = require('markdown');
+markdown.makeHtml('# Hello World!');
+			</code></pre>
+
+			<p>Once you are running with seed, you can load package code simply with require:</p>
+
+			<pre><code>require('markdown');
+			</code></pre>
+
+			<p>This will look for a module in your local package (if you have one) named 
+			&#8216;markdown&#8217;.  If it is not found, seed will look for a package named 
+			&#8216;markdown&#8217;.  If still not found, it will look for a node library by the same
+			name.  </p>
+
+			<p>Generally this means that code written for node will continue to work with
+			seed unchanged.</p>
+
+			<h1 id="requiring_modules_within_packages">Requiring Modules Within Packages</h1>
+
+			<p>Often times you will only want to work with a package by requiring its 
+			public API.  You get this API by calling <code>require('packageName')</code>.  If you 
+			instead need to require an individual module within a package, you and get the
+			module by using namespacing.  For example:</p>
+
+			<pre><code>require('markdown:parser');
+			</code></pre>
+
+			<p>Would look for a module named &#8216;parser&#8217; inside the &#8216;markdown&#8217; package.  </p>
+
+			<h1 id="creating_your_own_packages">Creating Your Own Packages</h1>
+
+			<p>Seed is useful if you need to hack out a single JavaScript file to run on the
+			command line.  But if you plan to build a larger app, you are probably going 
+			to want to split your code into multiple files.  You may even want to split
+			your code into multiple packages that you can share with others.</p>
+
+			<p>In both of these cases, the best way to manage your files is to create 
+			a package for yourself.</p>
+
+			<p>Building a package is very easy.  Just create a folder, add a package.json 
+			file and put your source code into a lib folder like so:</p>
+
+			<pre><code>hello-world/
+package.json  &lt;-- contains your package definition
+lib/
+	index.js  &lt;-- default module
+	another-module.js
+</code></pre>
+
+			<p>In Seed, the default module is called &#8216;index.js&#8217;.  This module usually exports
+			your public API. It is loaded when someone requires your package without 
+			naming a specific module (for example <code>require('markdown')</code> would look in the
+			&#8216;markdown&#8217; package for a module named &#8216;index&#8217;).  </p>
+
+			<p>Alternatively, you can omit the index.js file and use a file with the same 
+			name as the package.  In the example above, <code>index.js</code> could be renamed to 
+			<code>hello-world.js</code> and it would still load as the default.</p>
+
+			<h2 id="defining_your_packagejson">Defining Your Package.json</h2>
+
+			<p>The most important part of a package is the package.json file.  This file 
+			describes the settings for your package to seed and other CommonJS-compliant
+			package managers.</p>
+
+			<p>At a minimum is must contain the following two properties:</p>
+
+			<pre><code>{
+   "name": "hello-world",
+   "version": "0.1.0"
+}
+			</code></pre>
+
+			<p>The name must be the name of the package.  It should match the name of the 
+			directory your package is in (&#8216;hello-world&#8217; in this example).  The version
+			number must increment anytime you plan to publish new changes.  It must 
+			follow the <a href="http://semver.org">semantic versioning spec</a>.</p>
+
+			<p>In addition to the above two properties, you will often want your package.json
+			to also list any dependencies like so:</p>
+
+			<pre><code>{
+  "name": "hello-world",
+  "version": "0.1.0",
+
+  "dependencies": {
+    "markdown": "1.0.0"
+  }
+}</code></pre>
+
+			<p>The dependencies hash describes all packages that your package requires in 
+			order to run.  When someone installs your package via seed, all of these
+			dependencies will be automatically fetched an installed as well.</p>
+
+			<p>Each item in the hash defines a single package.  The value is a required 
+			version number.  Since seed uses semantic versioning, naming a version number
+			here usually means that any version of the package can be used that is 
+			semantically compatible.  </p>
+
+			<p>In general this means seed will use any version of the package that is equal 
+			to or greater than the version named but less then the next major version 
+			number.  For example, requiring version &#8216;1.2.0&#8217; will get any version >= 1.2.0
+			but &lt; 2.0.0.</p>
+
+			<p>If you do not want to use semantic versioning, you can force seed to use an 
+			exact version instead by prefixing the version with an &#8216;=&#8217; sign.  For example 
+			&#8216;=1.2.0&#8217; will <em>only</em> load version 1.2.0 of the package - nothing later.  </p>
+
+			<p>You can also use &#8216;~&#8217; to simply load the latest installed version of the 
+			package, but that this is not recommended since it can make your code 
+			unstable.</p>
+
+			<h1 id="loading_your_own_package">Loading Your Own Package</h1>
+
+			<p>If you are writing an app as a package, you will often want to invoke the 
+			code from the command line.  To do this, you should create a bootstrap file
+			in a &#8216;bin&#8217; directory within your package.  It should look like this:</p>
+
+			<pre><code>#!/usr/bin/env seed
+
+require.loader.register(__dirname, '..');
+require('hello-world').main();
+			</code></pre>
+
+			<p>The first line of code in this example tells seed that you want to register the top-level directory as the current package.  This will make the package 
+			visible to seed even though it is not installed in the system.</p>
+
+			<p>After you have registered your package you can require the package and invoke
+			any methods (like main()) in the example here.</p>
+
+			<h2 id="using_nested_packages">Using Nested Packages</h2>
+
+			<p>One added benefit of working inside your own packages is that you can include
+			frozen or nested packages that will override any installed versions.  To add 
+			a nested package, just create a &#8216;packages&#8217; directory and place your packages
+			inside of it.  Requiring those package names will cause them to be used 
+			instead.</p>
+
+			<p>Alternatively, if you have a package already installed and you just want to
+			get a copy into your own package to ensure it is always used, you can use the
+			<code>freeze</code> command:</p>
+
+			<pre><code>seed freeze markdown</code></pre>
+
+			<p>This will copy the package file into your own packages directory.</p>
+
+			<p>If you want to edit the package, instead you can use the <code>fork</code> command,
+			which will look for a repository definition in the package.json and use it:</p>
+
+			<pre><code>seed fork markdown</code></pre>
+
+			<h1 id="pushing_packages">Pushing Packages</h1>
+
+			<p>To push a package, you will first need to signup for an account or login in 
+			a machine.  If you have never pushed before, signup for an account with:</p>
+
+			<pre><code>seed remote signup</code></pre>
+
+			<p><strong>NOTE:</strong> Due to limitations in Node, seed will echo your password to the 
+			screen as you type.</p>
+
+			<p>If you already have an account, you should login to a new machine:</p>
+
+			<pre><code>seed remote login</code></pre>
+
+			<p>You only need to login or signup once per machine.  Once you&#8217;ve done so, you
+			can push a package with the <code>push</code> command:</p>
+
+			<pre><code>seed push ./hello-world</code></pre>
+
+			<p>Note that you must pass the path to the package you want to push, not the 
+			package name.</p>
+
+			<p>Seed will only allow you to push a particular package version once.  If you 
+			need to make a change and push again, just bump the patch number and push 
+			again.</p>
+
+			<p>That&#8217;s all the docs we have for now.  More is coming later.</p>
+		</div>
+		
+		<div id="nav">
+			<strong>
+				<a href="/">Home</a> ~
+				<a href="/about">About</a> ~
+				<a href="/download">Download</a> ~
+				<a href="/community">Community</a> ~
+				<a href="http://blog.seedjs.org">Blog</a>
+			</strong>
+		</div>
+		
+	</body>
+</html>
