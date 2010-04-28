@@ -1,60 +1,56 @@
-<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
-	"http://www.w3.org/TR/html4/loose.dtd">
+<!DOCTYPE html>
 <html>
-	<head>
-		<title>seedJS.org</title>
-		<meta name="description" content="CommonJS package manager and more.">
-		<meta name="keywords" content="seedjs, CommonJS, nodeJS, javascript">
-		<link rel="stylesheet" href="/css/screen.css" type="text/css" media="screen" charset="utf-8">
-	</head>
-	<body>
-		<div id="main-body">
-		<h1>Getting Started with Seed.js</h1>
-		
-		<h2>Step 1: Install Node</h2>
-		<p>You will need node.js installed to run seed.js.  If you haven't done so already, visit the <a href="http://nodejs.org/#download">node.js website</a> and follow the directions there.</p>
-		
-		<h2>Step 2: Install Seed</h2>
-		<p>Right now you need to clone seed from git:</p>
-		<blockquote><code>
-			git clone git://github.com/seedjs/seed<br>
-			cd seed<br>
-			git submodule update --init
-		</code></blockquote>
-		<p>Then install seed by running the setup script:</p>
-		<blockquote><code>
-			./scripts/install.js
-		</code></blockquote>
-		
-		<p>You will need to add the seed bin directory to your path.  Open your bash profile (usually at ~/.profile) and add the following line:</p>
-		<blockquote><code>export PATH=~/.seeds/bin:$PATH</code></blockquote>
-		<p>Save and restart your terminal.  You should now be able to use seed.  (This process will be simplified further at some point.)</p>
-		
-		<h2>Step 3: Using Seed</h2>
-		<p>To list all packages on the server:</p>
-		<blockquote><code>seed list --remote</code></blockquote>
-		<p>And install packages:</p>
-		<blockquote><code>seed install markdown</code></blockquote>
-		<p>To use seed in your app, you should start your app with 'seed-node' instead of 'node'.  This will bootstrap in the package manager.  Here is a simple system that uses Markdown for format "Hello World":</p>
-		<blockquote><code>
-			#!/usr/bin/env seed<br>
-			<br>
-			var markdown = require('markdown');<br>
-			markdown.html('__Hello World__');<br>
-		</code></blockquote>
-		<p>For more in-depth info check out <a href="/documentation">the documentation</a>.  That's all for now.  More docs to come.  If you need help, get in touch at #seed.js on freenode.</p>
-		</div>
-		
-		<div id="nav">
-			<strong>
-				<a href="/">Home</a> ~ 
-				<a href="/about">About</a> ~
-				<a href="/documentation">Documentation</a> ~
-				<a href="/community">Community</a> ~
-				<a href="http://blog.seedjs.org">Blog</a>
-				
-			</strong>
-		</div>
-		
-	</body>
+  <head>
+    <title>seedJS.org</title>
+    <meta name="description" content="CommonJS package manager and more." />
+    <meta name="keywords" content="seedjs, CommonJS, nodeJS, javascript" />
+    <!--[if lt IE 9]><script src="http://html5shiv.googlecode.com/svn/trunk/html5.js"></script><![endif]-->
+    <link rel="stylesheet" href="/css/screen.css" type="text/css" media="screen, projection" />
+  </head>
+  <body>
+    <nav>
+      <a href="/">Home</a> ~
+      <a href="/about">About</a> ~
+      <a href="/download">Download</a> ~
+      <a href="/documentation">Documentation</a> ~
+      <a href="http://blog.seedjs.org/">Blog</a>
+    </nav>
+    <section>
+      <h1>Getting Started with Seed.js</h1>
+      <h2>Step 1: Install Node</h2>
+      <p>You will need node.js installed to run seed.js.  If you haven't done so already, visit the <a href="http://nodejs.org/#download">node.js website</a> and follow the directions there.</p>
+
+      <h2>Step 2: Install Seed</h2>
+      <p>Right now you need to clone seed from git:</p>
+      <blockquote><code>
+        $ git clone git://github.com/seedjs/seed<br>
+        $ cd seed<br>
+        $ git submodule update --init
+      </code></blockquote>
+      <p>Then install seed by running the setup script:</p>
+      <blockquote><code>
+        $ ./scripts/install.js
+      </code></blockquote>
+
+      <p>You will need to add the seed bin directory to your path.  Open your bash profile (usually at ~/.profile) and add the following line:</p>
+      <blockquote><code>export PATH=~/.seeds/bin:$PATH</code></blockquote>
+      <p>Save and restart your terminal.  You should now be able to use seed.  (This process will be simplified further at some point.)</p>
+
+      <h2>Step 3: Using Seed</h2>
+      <p>To list all packages on the server:</p>
+      <blockquote><code>$ seed list --remote</code></blockquote>
+      <p>And install packages:</p>
+      <blockquote><code>$ seed install markdown</code></blockquote>
+      <p>To use seed in your app, you should start your app with 'seed-node' instead of 'node'.  This will bootstrap in the package manager.  Here is a simple system that uses Markdown for format "Hello World":</p>
+      <blockquote><code>
+        #!/usr/bin/env seed<br>
+        var markdown = require('markdown');<br>
+        markdown.html('__Hello World__');<br>
+      </code></blockquote>
+      <p>For more in-depth info check out <a href="/documentation">the documentation</a>.  That's all for now.  More docs to come.  If you need help, get in touch at #seed.js on freenode.</p>
+    </section>
+    <footer>
+      <p>Copyright &copy; 2010 Sprout Systems, Inc.</p>
+    </footer>
+  </body>
 </html>

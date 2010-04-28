@@ -1,34 +1,39 @@
-<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
-	"http://www.w3.org/TR/html4/loose.dtd">
+<!DOCTYPE html>
 <html>
-	<head>
-		<title>seedJS.org</title>
-		<meta name="description" content="CommonJS package manager and more.">
-		<meta name="keywords" content="seedjs, CommonJS, nodeJS, javascript">
-		<link rel="stylesheet" href="/css/screen.css" type="text/css" media="screen" charset="utf-8">
-	</head>
-	<body>
-		<div id="billboard">
-			<img id="seeds-image" src="images/seeds.jpg", alt="seedJS.org"/>
-			<div id="content">
-				<div class="banner">
-					<h1>SEEDJS</h1>
-				</div>
-				<div class="tagline">
-					<h4>Organizing your commonJS libraries</h4>
-				</div>
-			</div>
-		</div>
-		
-		<div id="nav">
-			<strong>
-				<a href="/about">About</a> ~
-				<a href="/download">Download</a> ~
-				<a href="/documentation">Documentation</a> ~
-				<a href="/community">Community</a> ~
-				<a href="http://blog.seedjs.org">Blog</a>
-			</strong>
-		</div>
-		
-	</body>
+  <head>
+    <title>seedJS.org</title>
+    <meta name="description" content="CommonJS package manager and more." />
+    <meta name="keywords" content="seedjs, CommonJS, nodeJS, javascript" />
+    <!--[if lt IE 9]><script src="http://html5shiv.googlecode.com/svn/trunk/html5.js"></script><![endif]-->
+    <link rel="stylesheet" href="/css/screen.css" type="text/css" media="screen, projection" />
+  </head>
+  <body>
+    <header>
+      <img src="/images/seeds.png" alt="seedJS.org" />
+      <h1>SEEDJS</h1>
+      <h2>Organizing your commonJS libraries</h2>
+    </header>
+    <nav>
+      <a href="/about">About</a> ~
+      <a href="/download">Download</a> ~
+      <a href="/documentation">Documentation</a> ~
+      <a href="/community">Community</a> ~
+      <a href="http://blog.seedjs.org">Blog</a>
+    </nav>
+    <section>
+      <p>List the packages:</p>
+      <blockquote><code>$ seed list --remote</code></blockquote>
+      <p>Install a package:</p>
+      <blockquote><code>$ seed install markdown</code></blockquote>
+      <p>Use the package:</p>
+      <blockquote><code>
+        #!/usr/bin/env seed<br />
+        var markdown = require('markdown');<br />
+        markdown.html('__Hello World__');<br />
+      </code></blockquote>
+    </section>
+    <footer>
+      <p>Copyright &copy; 2010 Sprout Systems, Inc.</p>
+    </footer>
+  </body>
 </html>

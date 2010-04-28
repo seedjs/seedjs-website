@@ -1,47 +1,49 @@
 @font-face {
   font-family: "Diavlo";
-  src: url("/css/DiavloBOOK.otf");
+  src: url("/css/diavlo.otf");
 }
 
-body { 
-  margin:0; 
-  padding:0; 
-  font-family: "Helvetica", "Arial", sans-serif;
-  font-size: 16px;
+body {
+  margin: 0;
+  padding: 0;
   line-height: 1.4;
+  font-family: "Helvetica Neue", helvetica, arial, sans-serif;
+  font-size: 16px;
 }
 
 h1, h2, h3, h4, h5 {
   font-family: "Diavlo";
 }
 
-#nav {
+header {
   text-align: center;
-  padding: 20px;
+}
+
+header h1 {
+  margin: -24px 0 0 0;
+  font-size: 60px;
+  letter-spacing: -4px;
+}
+
+header h2 {
+  margin: 0;
+  font-size: 1em;
+}
+
+nav {
+  text-align: center;
+  margin: 20px 0 20px 0;
   font-family: "Diavlo";
 }
 
-#seeds-image { }
-
-#content { margin-top: -42px; }
-
-#content .banner { }
-#content .banner h1 { 
-  font-size: 60px; 
-  letter-spacing: -4px; 
-  margin: 0;  
+section {
+  width: 500px;
+  margin: 0 auto;
 }
 
-#content .tagline { }
-
-#content .tagline h4 { 
-  margin: 0;
-}
-
-#main-body {
-  margin: 40px 40px 0 40px;
-}
-
-#billboard { 
+footer {
+  margin-top: 3em;
   text-align: center;
+  font-family: "Diavlo";
+  font-size: 0.9em;
 }
