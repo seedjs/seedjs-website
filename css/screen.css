@@ -12,7 +12,11 @@ body {
 }
 
 h1, h2, h3, h4, h5 {
-  font-family: "Diavlo";
+  font-family: "Diavlo", "Helvetica Neue", helvetica, arial, sans-serif;
+}
+
+code {
+  font-family: "Monaco", "Courier New", monospace;
 }
 
 header, footer, nav, section, article {

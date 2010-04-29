@@ -20,9 +20,10 @@
       <p>To install a seed package, just use the <code>install</code> command:</p>
       <blockquote><code>$ seed install markdown</code></blockquote>
       <p>This will install both the package itself as well as any dependencies in a shared location on your computer (usually ~/.seeds/packages).</p>
-
+    </section>
+    <section>
       <h1>Requiring Packages</h1>
-      <p>$ seed extends the require() function defined for your module so that it can 
+      <p>seed extends the require() function defined for your module so that it can 
       find seed packages as well as regular node modules. This means to use seed
       you need to make sure it is loaded before you use require. Normally the
       best way to do this is to run your JavaScript using seed. For example,
@@ -46,7 +47,8 @@
       name.</p>
       <p>Generally this means that code written for node will continue to work with
       seed unchanged.</p>
-
+    </section>
+    <section>
       <h1>Requiring Modules Within Packages</h1>
       <p>Often times you will only want to work with a package by requiring its 
       public API. You get this API by calling <code>require('packageName')</code>. If you 
@@ -55,9 +57,10 @@
       <blockquote><code>require('markdown:parser');</code></blockquote>
 
       <p>Would look for a module named &#8216;parser&#8217; inside the &#8216;markdown&#8217; package.</p>
-
+    </section>
+    <section>
       <h1>Creating Your Own Packages</h1>
-      <p>$ seed is useful if you need to hack out a single JavaScript file to run on the
+      <p>seed is useful if you need to hack out a single JavaScript file to run on the
       command line. But if you plan to build a larger app, you are probably going 
       to want to split your code into multiple files. You may even want to split
       your code into multiple packages that you can share with others.</p>
@@ -79,51 +82,53 @@ lib/
       <p>Alternatively, you can omit the index.js file and use a file with the same 
       name as the package. In the example above, <code>index.js</code> could be renamed to 
       <code>hello-world.js</code> and it would still load as the default.</p>
-
-      <h2>Defining Your Package.json</h2>
-      <p>The most important part of a package is the package.json file. This file 
-      describes the settings for your package to seed and other CommonJS-compliant
-      package managers.</p>
-      <p>At a minimum is must contain the following two properties:</p>
-      <blockquote><pre><code>{
-   "name": "hello-world",
-   "version": "0.1.0"
-}
-      </code></pre></blockquote>
-
-      <p>The name must be the name of the package. It should match the name of the 
-      directory your package is in (&#8216;hello-world&#8217; in this example). The version
-      number must increment anytime you plan to publish new changes. It must 
-      follow the <a href="http://semver.org">semantic versioning spec</a>.</p>
-      <p>In addition to the above two properties, you will often want your package.json
-      to also list any dependencies like so:</p>
-       <blockquote><pre><code>{
-  "name": "hello-world",
-  "version": "0.1.0",
-
-  "dependencies": {
-    "markdown": "1.0.0"
+      <section>
+        <h2>Defining Your Package.json</h2>
+        <p>The most important part of a package is the package.json file. This file 
+        describes the settings for your package to seed and other CommonJS-compliant
+        package managers.</p>
+        <p>At a minimum is must contain the following two properties:</p>
+        <blockquote><pre><code>{
+     "name": "hello-world",
+     "version": "0.1.0"
   }
-}</code></pre></blockquote>
+        </code></pre></blockquote>
 
-      <p>The dependencies hash describes all packages that your package requires in 
-      order to run. When someone installs your package via seed, all of these
-      dependencies will be automatically fetched an installed as well.</p>
-      <p>Each item in the hash defines a single package. The value is a required 
-      version number. Since seed uses semantic versioning, naming a version number
-      here usually means that any version of the package can be used that is 
-      semantically compatible. </p>
-      <p>In general this means seed will use any version of the package that is equal 
-      to or greater than the version named but less then the next major version 
-      number. For example, requiring version &#8216;1.2.0&#8217; will get any version >= 1.2.0
-      but &lt; 2.0.0.</p>
-      <p>If you do not want to use semantic versioning, you can force seed to use an 
-      exact version instead by prefixing the version with an &#8216;=&#8217; sign. For example 
-      &#8216;=1.2.0&#8217; will <em>only</em> load version 1.2.0 of the package - nothing later. </p>
-      <p>You can also use &#8216;~&#8217; to simply load the latest installed version of the 
-      package, but that this is not recommended since it can make your code 
-      unstable.</p>
+        <p>The name must be the name of the package. It should match the name of the 
+        directory your package is in (&#8216;hello-world&#8217; in this example). The version
+        number must increment anytime you plan to publish new changes. It must 
+        follow the <a href="http://semver.org">semantic versioning spec</a>.</p>
+        <p>In addition to the above two properties, you will often want your package.json
+        to also list any dependencies like so:</p>
+         <blockquote><pre><code>{
+    "name": "hello-world",
+    "version": "0.1.0",
 
+    "dependencies": {
+      "markdown": "1.0.0"
+    }
+  }</code></pre></blockquote>
+
+        <p>The dependencies hash describes all packages that your package requires in 
+        order to run. When someone installs your package via seed, all of these
+        dependencies will be automatically fetched an installed as well.</p>
+        <p>Each item in the hash defines a single package. The value is a required 
+        version number. Since seed uses semantic versioning, naming a version number
+        here usually means that any version of the package can be used that is 
+        semantically compatible. </p>
+        <p>In general this means seed will use any version of the package that is equal 
+        to or greater than the version named but less then the next major version 
+        number. For example, requiring version &#8216;1.2.0&#8217; will get any version >= 1.2.0
+        but &lt; 2.0.0.</p>
+        <p>If you do not want to use semantic versioning, you can force seed to use an 
+        exact version instead by prefixing the version with an &#8216;=&#8217; sign. For example 
+        &#8216;=1.2.0&#8217; will <em>only</em> load version 1.2.0 of the package - nothing later. </p>
+        <p>You can also use &#8216;~&#8217; to simply load the latest installed version of the 
+        package, but that this is not recommended since it can make your code 
+        unstable.</p>
+      </section>
+    </section>
+    <section>
       <h1>Loading Your Own Package</h1>
       <p>If you are writing an app as a package, you will often want to invoke the 
       code from the command line. To do this, you should create a bootstrap file
@@ -138,23 +143,25 @@ require('hello-world').main();
       visible to seed even though it is not installed in the system.</p>
       <p>After you have registered your package you can require the package and invoke
       any methods (like main()) in the example here.</p>
+      <section>
+        <h2>Using Nested Packages</h2>
+        <p>One added benefit of working inside your own packages is that you can include
+        frozen or nested packages that will override any installed versions. To add 
+        a nested package, just create a &#8216;packages&#8217; directory and place your packages
+        inside of it. Requiring those package names will cause them to be used 
+        instead.</p>
+        <p>Alternatively, if you have a package already installed and you just want to
+        get a copy into your own package to ensure it is always used, you can use the
+        <code>freeze</code> command:</p>
+        <blockquote><pre><code>$ seed freeze markdown</code></pre></blockquote>
 
-      <h2>Using Nested Packages</h2>
-      <p>One added benefit of working inside your own packages is that you can include
-      frozen or nested packages that will override any installed versions. To add 
-      a nested package, just create a &#8216;packages&#8217; directory and place your packages
-      inside of it. Requiring those package names will cause them to be used 
-      instead.</p>
-      <p>Alternatively, if you have a package already installed and you just want to
-      get a copy into your own package to ensure it is always used, you can use the
-      <code>freeze</code> command:</p>
-      <blockquote><pre><code>$ seed freeze markdown</code></pre></blockquote>
-
-      <p>This will copy the package file into your own packages directory.</p>
-      <p>If you want to edit the package, instead you can use the <code>fork</code> command,
-      which will look for a repository definition in the package.json and use it:</p>
-      <blockquote><pre><code>$ seed fork markdown</code></pre></blockquote>
-
+        <p>This will copy the package file into your own packages directory.</p>
+        <p>If you want to edit the package, instead you can use the <code>fork</code> command,
+        which will look for a repository definition in the package.json and use it:</p>
+        <blockquote><pre><code>$ seed fork markdown</code></pre></blockquote>
+      </section>
+    </section>
+    <section>
       <h1>Pushing Packages</h1>
       <p>To push a package, you will first need to signup for an account or login in 
       a machine. If you have never pushed before, signup for an account with:</p>
@@ -171,7 +178,7 @@ require('hello-world').main();
 
       <p>Note that you must pass the path to the package you want to push, not the 
       package name.</p>
-      <p>$ seed will only allow you to push a particular package version once. If you 
+      <p>seed will only allow you to push a particular package version once. If you 
       need to make a change and push again, just bump the patch number and push 
       again.</p>
       <p>That&#8217;s all the docs we have for now. More is coming later.</p>
